@@ -2,7 +2,7 @@ const User = require("../models/user.models");
 const user_reservation = require('../models/user.reservation');
 
 
-exports.userService = {
+exports.Services = {
   find: () => User.find({}),
 
   findUserByEmail: (id) => User.findOne(id),

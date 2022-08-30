@@ -3,7 +3,7 @@ const {
   signUpValidation,
   loginValidation,
 } = require("../validation/validation");
-const { userService } = require("../services/user.services");
+const { Services } = require("../services/services");
 const { passwordHash, passwordCompare } = require("../helper/hashing");
 const { jwtSign } = require("../helper/jwt");
 const Reservation = require("../models/reservation.models");
@@ -28,7 +28,7 @@ exports.signUp = async (req, res, next) => {
       phoneNumber,
       password: hashedPassword,
     };
-    const new_user = await userService.signUp(data);
+    const new_user = await Services.signUp(data);
     return res
       .status(201)
       .json({ message: "user added successfully", new_user: new_user._id });
@@ -45,7 +45,7 @@ exports.loginUser = async (req, res, next) => {
       return res
         .status(400)
         .json({ message: validation.error.details[0].message });
-    const user = await userService.findUserByEmail({ email });
+    const user = await Services.findUserByEmail({ email });
     const isMatch = await passwordCompare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
@@ -60,7 +60,7 @@ exports.loginUser = async (req, res, next) => {
     const dataInfo = {
       status: "success",
       message: "Login successful",
-      // access_token: token,
+      access_token: token,
     };
     return res.status(200).json(dataInfo);
   } catch (error) {

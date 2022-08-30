@@ -6,7 +6,7 @@ const {
   signUpValidation,
   loginValidation,
 } = require("../validation/validation");
-const { adminService } = require("../services/admin.services");
+const { Services } = require("../services/services");
 const user_reservation = require("../models/user.reservation");
 
 exports.adminSignUp = async (req, res, next) => {
@@ -30,7 +30,7 @@ exports.adminSignUp = async (req, res, next) => {
       password: hashedPassword,
       role,
     };
-    const new_admin = await adminService.signUp(data);
+    const new_admin = await Services.signUp(data);
     return res
       .status(201)
       .json({ message: "admin added successfully", new_admin: new_admin._id });
@@ -47,7 +47,7 @@ exports.adminLogin = async (req, res, next) => {
       return res
         .status(400)
         .json({ message: validation.error.details[0].message });
-    const admin = await adminService.findAdminByEmail({ email });
+    const admin = await Services.findUserByEmail({ email });
     const isMatch = await passwordCompare(password, admin.password);
     if (!isMatch) {
       return res.status(400).json({
@@ -62,7 +62,7 @@ exports.adminLogin = async (req, res, next) => {
     const dataInfo = {
       status: "success",
       message: "Admin Logged in successful",
-    //   access_token: token,
+      access_token: token,
     };
     return res.status(200).json(dataInfo);
   } catch (error) {
@@ -74,7 +74,7 @@ exports.allUsers = async (req, res, next) => {
   try {
     //destructured req.query
     const { page, limit } = req.query;
-    const user = await User.find()
+    const user = await User.find({role:"user"})
       .sort({ createdAt: 1 })
       .skip((page - 1) * limit) // 0 * 5 // skip 0
       .limit(limit * 1);

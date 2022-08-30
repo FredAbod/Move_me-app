@@ -10,6 +10,7 @@ const jwtSign = (payload) => {
   });
 };
 
+
 const jwtVerify = (token) => {
   try {
     return jwt.verify(token, JWT_SECRET);

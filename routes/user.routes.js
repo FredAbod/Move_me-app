@@ -8,13 +8,13 @@ const {
   deleteBooking,
   ourServices,
 } = require("../controllers/user.controllers");
-const { userIsAuth } = require("../middleware/isAuth");
+const { isAuth } = require("../middleware/isAuth");
 
 router.post("/signup", signUp);
 router.post("/login", loginUser);
-router.post("/reservation", userIsAuth, post_user_reservation);
-router.put("/updatebooking", userIsAuth, updateBooking);
-router.delete("/deletebooking", userIsAuth, deleteBooking);
-router.get("/ourservices", userIsAuth, ourServices);
+router.post("/reservation", isAuth, post_user_reservation);
+router.put("/updatebooking", isAuth, updateBooking);
+router.delete("/deletebooking", isAuth, deleteBooking);
+router.get("/ourservices", isAuth, ourServices);
 
 module.exports = router;

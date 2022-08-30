@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require('../models/user.models')
 
 const userReservationSchema = new mongoose.Schema(
     {

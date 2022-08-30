@@ -6,7 +6,7 @@ const {
     postReservation,
     userBookings,
   } = require("../controllers/admin.controllers");
-  const { isAuth, validateAdmin } = require("../middleware/isAuth");
+  const {  validateAdmin, isAuth } = require("../middleware/isAuth");
 
   router.post("/signup", adminSignUp);
 router.post("/login", adminLogin);
