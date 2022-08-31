@@ -61,7 +61,9 @@ npm i
 npm run dev
 ```
 
-[POSTMAN LINK](https://documenter.getpostman.com/view/21992639/VUxLw8Vd)
+[LOCALHOST POSTMAN LINK](https://documenter.getpostman.com/view/21992639/VUxLw8Vd)
+----
+[HEROKU POSTMAN LINK](https://documenter.getpostman.com/view/21992639/VUxNSTn3)
 ----
 [Authentication Article](https://dev.to/fredabod/authorization-in-nodejs-all-you-need-to-know-3fga)
 ----
