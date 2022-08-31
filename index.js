@@ -22,6 +22,9 @@ app.use(limiter);
 app.get('/', (req, res) => res.send('HOME PAGE'));
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/admin', adminRouter);
+app.all("*", (req, res) => {
+    return res.status(404).json({ message: "Oops page not found" });
+  });
 app.listen(port, () => {
     console.log(`listening on port http://localhost:${port}`);
 });
