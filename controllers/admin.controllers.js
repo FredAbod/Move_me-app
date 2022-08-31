@@ -35,7 +35,9 @@ exports.adminSignUp = async (req, res, next) => {
       .status(201)
       .json({ message: "admin added successfully", new_admin: new_admin._id });
   } catch (error) {
-    next(error);
+    return res
+    .status(500)
+    .json({ message: 'Email or PhoneNumber Already Exist'});
   }
 };
 

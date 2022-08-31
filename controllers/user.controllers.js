@@ -33,7 +33,9 @@ exports.signUp = async (req, res, next) => {
       .status(201)
       .json({ message: "user added successfully", new_user: new_user._id });
   } catch (error) {
-    next(error);
+   return res
+   .status(500)
+   .json({ message: 'Email or PhoneNumber Already Exist'});
   }
 };
 
@@ -87,7 +89,9 @@ exports.post_user_reservation = async (req, res, next) => {
       .status(201)
       .json({ saved_reservation, message: "train seat booked successfully" });
   } catch (error) {
-    next(error);
+    return res
+    .status(500)
+    .json({ message: 'Train Seat Already Booked'});
   }
 };
 
