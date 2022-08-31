@@ -45,7 +45,7 @@ The packages i installed are;
 * EXPRESS-RATE-LIMIT: this is Used to limit repeated requests to public APIs and/or endpoints such as password reset
 * JOI:  schema description language and data validator for JavaScript.
 * JSONWEBTOKEN:  is a proposed Internet standard for creating data with optional signature and/or optional encryption whose payload holds JSON that asserts some number of claims. The tokens are signed either using a private secret or a public/private key. This is used for authorization
-* MONGOOSE: THIS SERVES AS MY ODM/ORM (OBJECT DATA MODELLING/ OBJECT RELATIONAL MODELLING),
+* MONGOOSE: THIS SERVES AS MY ODM/ORM (OBJECT DOCUMENT MAPPING/ OBJECT RELATIONAL MAPPING),
 * MORGAN: THIS IS A MIDDLEWARE THAT HELPS ME LOG MY ERRORS AND REQUEST ON MY CONSOLE OR TERMINAL  
 
 * NODEMON - WHICH I INSTALLED AS DEVDEPENDENCIES WHICH MEANS DEVELOPMENT DEPENDENCIES, THIS MEANS I WON'T BE NEEDING THIS PACKAGE DURING PRODUCTION OR TESTING UNTIL THE APP IS DEPLOYED ON THE SERVER. NODEMON WRAPS NODE AND HELPS ME RESTART MY NODE APP WHEN FILE CHANGES IN THE DIRECTORY ARE DETECTED. 
