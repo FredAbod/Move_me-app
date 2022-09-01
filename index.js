@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const apicache = require('apicache');
 const  app  = express();
 const limiter = require('./helper/rateLimiter');
 const connectDB = require('./config/db');
@@ -10,6 +11,7 @@ const adminRouter = require('./routes/admin.routes');
 
 const port = process.env.PORT || 6262;
 connectDB();
+let cache = apicache.middleware;
 if (process.env.NODE_ENV === "development") {
     app.use(morgan('dev'));
 }
@@ -17,7 +19,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(limiter);
-
+app.use(cache('1 minutes'));
 
 app.get('/', (req, res) => res.send('HOME PAGE'));
 app.use('/api/v1/user', userRouter);
