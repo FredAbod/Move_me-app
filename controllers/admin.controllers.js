@@ -89,13 +89,14 @@ exports.allUsers = async (req, res, next) => {
 
 exports.postReservation = async (req, res, next) => {
   try {
-    const { trainSeats, coach, bookingPeriod, train_destination_from_to } =
+    const { trainSeats, coach, bookingPeriod,from,to } =
       req.body;
     const newReservation = new Reservation({
       trainSeats,
       coach,
       bookingPeriod,
-      train_destination_from_to,
+      from,
+      to,
     });
     const saved_reservation = await newReservation.save();
     return res.status(201).json(saved_reservation);

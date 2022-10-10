@@ -18,7 +18,11 @@ const reservationSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        train_destination_from_to: {
+        from: {
+            type: String,
+            required: true,
+        },
+        to: {
             type: String,
             required: true,
         }

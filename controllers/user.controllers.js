@@ -7,6 +7,7 @@ const { Services } = require("../services/services");
 const { passwordHash, passwordCompare } = require("../helper/hashing");
 const { jwtSign } = require("../helper/jwt");
 const Reservation = require("../models/reservation.models");
+const QRCode = require("qrcode");
 
 exports.signUp = async (req, res, next) => {
   try {
@@ -17,8 +18,6 @@ exports.signUp = async (req, res, next) => {
         .status(400)
         .json({ message: validation.error.details[0].message });
     }
-
-
     const hashedPassword = await passwordHash(password);
 
     const data = {
@@ -33,9 +32,9 @@ exports.signUp = async (req, res, next) => {
       .status(201)
       .json({ message: "user added successfully", new_user: new_user._id });
   } catch (error) {
-   return res
-   .status(500)
-   .json({ message: 'Email or PhoneNumber Already Exist'});
+    return res
+      .status(500)
+      .json({ message: "Email or PhoneNumber Already Exist" });
   }
 };
 
@@ -85,13 +84,15 @@ exports.post_user_reservation = async (req, res, next) => {
       depature_date_and_time,
     });
     const saved_reservation = await newReservation.save();
+
+     QRCode.toFile("../saved_reservation.png", saved_reservation);
+
+    // generateQR([newReservation]);
     return res
       .status(201)
       .json({ saved_reservation, message: "train seat booked successfully" });
   } catch (error) {
-    return res
-    .status(500)
-    .json({ message: 'Train Seat Already Booked'});
+    return res.status(500).json({ message: "Train Seat Already Booked" });
   }
 };
 
@@ -131,12 +132,10 @@ exports.deleteBooking = async (req, res, next) => {
     const deleted_user_reservation = await user_reservation.findByIdAndDelete(
       id
     );
-    return res
-      .status(200)
-      .json({
-        message: "Booking Deleted Successfully",
-        deleted_user_reservation,
-      });
+    return res.status(200).json({
+      message: "Booking Deleted Successfully",
+      deleted_user_reservation,
+    });
   } catch (error) {
     next(error);
   }
